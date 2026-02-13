@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💖 For You, My Love 💖</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💝</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Quicksand:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ═══════════════════════════════════════ -->
+  <!-- CANVAS FOR PARTICLES                    -->
+  <!-- ═══════════════════════════════════════ -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- CURSOR TRAIL                            -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="cursor-trail"></div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- MUSIC TOGGLE                            -->
+  <!-- ═══════════════════════════════════════ -->
+  <button id="music-toggle" class="music-btn" aria-label="Toggle music">
+    <span class="music-icon">🎵</span>
+    <span class="music-bars">
+      <span></span><span></span><span></span><span></span>
+    </span>
+  </button>
+  <audio id="bg-music" loop>
+    <source src="music/song.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SCREEN 1: PASSWORD GATE                 -->
+  <!-- ═══════════════════════════════════════ -->
+  <section id="password-screen" class="fullscreen active">
+    <div class="password-wrapper">
+      <div class="lock-heart">
+        <svg viewBox="0 0 100 100" class="heart-lock-svg">
+          <path d="M50 88 C25 65, 2 45, 2 28 C2 14, 14 2, 28 2 C36 2, 44 6, 50 16 C56 6, 64 2, 72 2 C86 2, 98 14, 98 28 C98 45, 75 65, 50 88Z" fill="none" stroke="url(#heartGrad)" stroke-width="3"/>
+          <defs>
+            <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ff6b9d"/>
+              <stop offset="100%" style="stop-color:#ee3a7b"/>
+            </linearGradient>
+          </defs>
+          <text x="50" y="55" text-anchor="middle" font-size="28" fill="#ff6b9d">🔒</text>
+        </svg>
+      </div>
+      <h1 class="password-title">Unlock My Heart</h1>
+      <p class="password-subtitle">Enter the secret password, my love...</p>
+      <div class="password-input-wrap">
+        <input type="password" id="password-input" placeholder="Type the magic word..." autocomplete="off" />
+        <button id="password-submit" class="btn-heart">
+          <span>💖</span>
+        </button>
+      </div>
+      <p id="password-hint" class="password-hint">Hint: What do I always say to you? 💕</p>
+      <p id="password-error" class="password-error"></p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SCREEN 2: ENVELOPE ANIMATION            -->
+  <!-- ═══════════════════════════════════════ -->
+  <section id="envelope-screen" class="fullscreen">
+    <div class="envelope-scene">
+      <h2 class="envelope-title">You have a special letter... 💌</h2>
+      <div class="envelope" id="envelope">
+        <div class="envelope-flap"></div>
+        <div class="envelope-body">
+          <div class="letter" id="letter">
+            <p class="letter-text">My dearest love,<br><br>I made this little world just for you.<br>Every pixel, every animation, every word —<br>is my way of saying...<br><br><strong>I love you more than words can say.</strong><br><br>— Your Carlo 💕</p>
+          </div>
+        </div>
+        <div class="envelope-heart">💝</div>
+      </div>
+      <p class="envelope-instruction">Click the envelope to open it</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SCREEN 3: THE QUESTION                  -->
+  <!-- ═══════════════════════════════════════ -->
+  <section id="question-screen" class="fullscreen">
+    <div class="question-wrapper">
+      <div class="question-hearts">
+        <span>💖</span><span>💗</span><span>💝</span><span>💖</span><span>💗</span>
+      </div>
+      <h2 class="question-text">Will you allow</h2>
+      <h1 class="question-name">Engr. Carlo Cimacio</h1>
+      <h2 class="question-text">to be your Valentine? 💕</h2>
+      <div class="question-buttons">
+        <button id="btn-yes" class="btn-answer btn-yes">Yes! 💖</button>
+        <button id="btn-no" class="btn-answer btn-no">No 😢</button>
+      </div>
+      <p id="no-message" class="no-message"></p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SCREEN 4: CELEBRATION                   -->
+  <!-- ═══════════════════════════════════════ -->
+  <section id="celebration-screen" class="fullscreen">
+    <div class="celebration-wrapper">
+      <div class="celebration-emoji">🥰</div>
+      <h1 class="celebration-title">YAAAY!</h1>
+      <p class="celebration-subtitle">I knew you'd say yes! 💕</p>
+      <p class="celebration-text">Now let me show you everything I've prepared for you...</p>
+      <button id="btn-explore" class="btn-explore">Explore Your Gift 🎁</button>
+    </div>
+    <canvas id="confetti-canvas"></canvas>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- MAIN CONTENT (after unlock)             -->
+  <!-- ═══════════════════════════════════════ -->
+  <main id="main-content" class="hidden">
+
+    <!-- NAVIGATION -->
+    <nav id="navbar" class="navbar">
+      <div class="nav-brand">💕 For My Love</div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#countdown-section">Countdown</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reasons">Reasons</a></li>
+        <li><a href="#love-letter">Letter</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#languages">Languages</a></li>
+        <li><a href="#promise">Promise</a></li>
+      </ul>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section id="hero" class="section hero-section">
+      <div class="hero-content">
+        <div class="hero-badge">Happy Valentine's Day 2026</div>
+        <h1 class="hero-title">
+          <span class="hero-line">To the most</span>
+          <span class="hero-line hero-highlight">beautiful soul</span>
+          <span class="hero-line">in my universe 💫</span>
+        </h1>
+        <div class="hero-names">
+          <span class="hero-name">Carlo</span>
+          <span class="hero-ampersand">&</span>
+          <span class="hero-name hero-name-you">You</span>
+        </div>
+        <div class="hero-heart-divider">
+          <span class="divider-line"></span>
+          <span class="divider-heart">💖</span>
+          <span class="divider-line"></span>
+        </div>
+        <p class="hero-quote">"In all the world, there is no heart for me like yours."</p>
+        <a href="#countdown-section" class="scroll-indicator">
+          <span>Scroll Down</span>
+          <div class="scroll-arrow"></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══ COUNTDOWN ═══ -->
+    <section id="countdown-section" class="section">
+      <div class="container">
+        <h2 class="section-title">💝 Valentine's Day Countdown 💝</h2>
+        <div id="countdown" class="countdown">
+          <div class="countdown-item">
+            <span class="countdown-value" id="cd-days">00</span>
+            <span class="countdown-label">Days</span>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-item">
+            <span class="countdown-value" id="cd-hours">00</span>
+            <span class="countdown-label">Hours</span>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-item">
+            <span class="countdown-value" id="cd-minutes">00</span>
+            <span class="countdown-label">Minutes</span>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-item">
+            <span class="countdown-value" id="cd-seconds">00</span>
+            <span class="countdown-label">Seconds</span>
+          </div>
+        </div>
+        <p id="countdown-message" class="countdown-message"></p>
+      </div>
+    </section>
+
+    <!-- ═══ GALLERY ═══ -->
+    <section id="gallery" class="section">
+      <div class="container">
+        <h2 class="section-title">📸 Our Beautiful Moments 📸</h2>
+        <p class="section-subtitle">Every picture tells our story</p>
+        <div class="gallery-grid" id="gallery-grid">
+          <!-- Photos loaded by JS from images/ folder config -->
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="lightbox">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <button class="lightbox-prev" id="lightbox-prev">&#10094;</button>
+      <button class="lightbox-next" id="lightbox-next">&#10095;</button>
+      <div class="lightbox-content">
+        <img id="lightbox-img" src="" alt="" />
+        <p id="lightbox-caption" class="lightbox-caption"></p>
+        <p id="lightbox-counter" class="lightbox-counter"></p>
+      </div>
+    </div>
+
+    <!-- ═══ REASONS I LOVE YOU ═══ -->
+    <section id="reasons" class="section">
+      <div class="container">
+        <h2 class="section-title">💖 Reasons I Love You 💖</h2>
+        <p class="section-subtitle">Click each card to reveal...</p>
+        <div class="reasons-grid" id="reasons-grid">
+          <!-- Generated by JS -->
+        </div>
+        <div class="reasons-counter">
+          <span id="reasons-revealed">0</span> / <span id="reasons-total">0</span> revealed
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ LOVE LETTER ═══ -->
+    <section id="love-letter" class="section">
+      <div class="container">
+        <h2 class="section-title">💌 A Letter From My Heart 💌</h2>
+        <div class="letter-card">
+          <div class="letter-paper">
+            <p class="letter-date">February 14, 2026</p>
+            <div id="typewriter-text" class="typewriter-content"></div>
+            <div class="letter-signature">
+              <p>Forever yours,</p>
+              <p class="signature-name">Engr. Carlo Cimacio</p>
+              <span class="signature-heart">💕</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SCRATCH CARDS ═══ -->
+    <section id="surprises" class="section">
+      <div class="container">
+        <h2 class="section-title">🎁 Scratch to Reveal Surprises 🎁</h2>
+        <p class="section-subtitle">Use your mouse/finger to scratch!</p>
+        <div class="scratch-grid" id="scratch-grid">
+          <!-- Generated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="section">
+      <div class="container">
+        <h2 class="section-title">💕 Our Journey Together 💕</h2>
+        <div class="timeline" id="timeline-container">
+          <!-- Generated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ I LOVE YOU IN LANGUAGES ═══ -->
+    <section id="languages" class="section">
+      <div class="container">
+        <h2 class="section-title">🌍 I Love You Around The World 🌍</h2>
+        <div class="languages-carousel" id="languages-carousel">
+          <div class="language-display">
+            <p class="language-text" id="language-text"></p>
+            <p class="language-name" id="language-name"></p>
+          </div>
+        </div>
+        <div class="languages-globe">🌎</div>
+      </div>
+    </section>
+
+    <!-- ═══ PROMISE ═══ -->
+    <section id="promise" class="section">
+      <div class="container">
+        <h2 class="section-title">💍 My Promise To You 💍</h2>
+        <div class="promise-card">
+          <div class="promise-content">
+            <p>I promise to love you on your best days and your worst days.</p>
+            <p>I promise to make you laugh when you want to cry.</p>
+            <p>I promise to hold your hand through every storm.</p>
+            <p>I promise to be your biggest fan, your safest place, and your forever home.</p>
+            <p>I promise to choose you — today, tomorrow, and every day after that.</p>
+            <div class="promise-signature">
+              <p>With all my heart and soul,</p>
+              <p class="promise-name">Engr. Carlo Cimacio 💖</p>
+            </div>
+          </div>
+        </div>
+        <div class="infinity-symbol">∞</div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+      <div class="footer-hearts">
+        <span>💖</span><span>💗</span><span>💝</span><span>💖</span><span>💗</span>
+      </div>
+      <p class="footer-text">Made with 💕 just for you</p>
+      <p class="footer-year">Valentine's Day 2026</p>
+      <p class="footer-credit">By: Engr. Carlo Cimacio</p>
+    </footer>
+
+  </main>
+
+  <script src="js/particles.js"></script>
+  <script src="js/confetti.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
