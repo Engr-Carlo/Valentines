@@ -13,9 +13,31 @@ const CONFIG = {
   // then list them below with captions
   photos: [
     // Example:
-    // { src: 'images/photo1.jpg', caption: 'Our first date 💕' },
-    // { src: 'images/photo2.jpg', caption: 'That sunset we watched 🌅' },
-    // { src: 'images/photo3.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo1.jpg', caption: 'Our first date 💕' },
+    { src: 'images/photo2.jpg', caption: 'That sunset we watched 🌅' },
+    { src: 'images/photo3.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo4.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo5.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo6.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo7.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo8.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo9.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo10.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo11.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo12.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo13.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo14.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo15.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo16.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo17.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo18.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo19.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo20.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo21.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo22.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo23.jpg', caption: 'Your beautiful smile 😊' },
+    { src: 'images/photo24.jpg', caption: 'Your beautiful smile 😊' },
+
   ],
 
   // ═══ REASONS I LOVE YOU ═══
