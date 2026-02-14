@@ -108,43 +108,6 @@ Happy Valentine's Day, my everything. 💕`,
 
   // ═══ NEW FEATURES ═══
 
-  // Memory Game Cards (emojis to match)
-  memoryEmojis: ['💖', '💝', '💗', '💕', '✨', '🌸', '💫', '🌹'],
-
-  // Love Quiz Questions
-  quizQuestions: [
-    {
-      question: 'What\'s the first thing I noticed about you?',
-      options: ['Your smile', 'Your eyes', 'Your laugh', 'Your kindness'],
-      correct: 0,
-      message: 'Your smile lit up the entire room! ✨'
-    },
-    {
-      question: 'What\'s our song? (The one that makes me think of you)',
-      options: ['A love ballad', 'An upbeat pop song', 'A romantic classic', 'Our own special tune'],
-      correct: 3,
-      message: 'Every song becomes our song when I\'m with you! 🎵'
-    },
-    {
-      question: 'What do I love most about spending time with you?',
-      options: ['The adventures', 'The quiet moments', 'The laughter', 'Everything'],
-      correct: 3,
-      message: 'Every single second with you is my favorite! 💕'
-    },
-    {
-      question: 'How do you make me feel?',
-      options: ['Happy', 'Loved', 'Complete', 'All of the above'],
-      correct: 3,
-      message: 'You make me feel like I can conquer the world! 🌟'
-    },
-    {
-      question: 'What\'s my favorite thing to do with you?',
-      options: ['Talk for hours', 'Just exist together', 'Make you smile', 'All of these!'],
-      correct: 3,
-      message: 'As long as I\'m with you, I\'m doing my favorite thing! 💖'
-    }
-  ],
-
   // Spin Wheel Prizes
   wheelPrizes: [
     { emoji: '💝', text: '1000 hugs and kisses, redeemable anytime!', color: '#ff6b9d' },
@@ -159,26 +122,28 @@ Happy Valentine's Day, my everything. 💕`,
 
   // Fortune Cookie Messages
   fortuneMessages: [
-    'You are about to be kissed... right now! 💋',
-    'A romantic adventure awaits you this week! 🗺️',
-    'Someone is thinking about you every second... it\'s me! 💭',
-    'You will receive an unexpected compliment today... You\'re GORGEOUS! 😍',
-    'Love and laughter will fill your day! 🎉',
-    'A cozy cuddle session is in your near future! 🫂',
-    'Your smile will brighten someone\'s day... mine! ☀️',
-    'Sweet surprises are headed your way! 🎁',
-    'You are more loved than you could ever know! 💕',
-    'Good vibes and warm hugs surround you always! 🤗'
+    'You are the most beautiful person in the world, inside and out. Never forget that! 💖',
+    'Every moment with you is a gift I treasure. You make my life complete! 🎁',
+    'You are my greatest blessing, my sweetest love, my everything! 💝',
+    'Your smile lights up my entire world. You are absolutely gorgeous! 😍',
+    'I fall more in love with you every single day. You are precious to me! 💕',
+    'You deserve all the happiness in the world, and I promise to give you mine! ☀️',
+    'You are loved beyond measure, cherished beyond words, and needed beyond belief! 💗',
+    'In you, I\'ve found my soulmate, my best friend, my forever! 💫',
+    'You are the answer to every prayer, the love of my life! 🙏',
+    'With you, I am home. You are my safe place, my comfort, my joy! 🏡',
+    'You are absolutely perfect just the way you are. I love everything about you! ✨',
+    'My love for you grows stronger with each passing second! 💞',
   ],
 
   // Virtual Gift Box Surprises
   giftBoxes: [
-    { emoji: '☕', text: 'Coffee/tea date - your favorite drink on me!', color: '#d4a574' },
-    { emoji: '📚', text: 'Bookstore date - I\'ll buy you any book you want!', color: '#8b7355' },
-    { emoji: '🎵', text: 'Concert/live music - let\'s make memories!', color: '#9b59b6' },
-    { emoji: '🍰', text: 'Dessert tasting tour - all the sweets!', color: '#f8b4d9' },
-    { emoji: '🎭', text: 'Theater/show date - fancy night out!', color: '#e74c3c' },
-    { emoji: '🌺', text: 'Flower picking/garden stroll - peaceful and romantic!', color: '#ff69b4' }
+    { emoji: '💝', text: 'A thousand kisses just for you! You deserve all the love in the world! 💋', color: '#ff6b9d' },
+    { emoji: '🌹', text: 'You\'re more beautiful than any flower. You take my breath away! 😍', color: '#ff69b4' },
+    { emoji: '💕', text: 'Forever and always, you\'ll be the love of my life! I cherish you! 💖', color: '#fd79a8' },
+    { emoji: '✨', text: 'You make every day magical! Thank you for being you! 🌟', color: '#fab1be' },
+    { emoji: '🎁', text: 'Every moment with you is a precious gift I treasure! 💗', color: '#ffc2db' },
+    { emoji: '💫', text: 'You\'re my dream come true, my answered prayer, my everything! 🙏', color: '#ff9ec0' }
   ],
 
   // Daily Affirmations
@@ -447,8 +412,6 @@ function showMainContent() {
   initCountdown();
   initGallery();
   initReasons();
-  initMemoryGame();
-  initLoveQuiz();
   initSpinWheel();
   initFortuneCookies();
   initGiftBoxes();
@@ -458,7 +421,6 @@ function showMainContent() {
   initTimeline();
   initLanguages();
   initTreasureHunt();
-  initKonamiCode();
   initScrollReveal();
 }
 
@@ -507,33 +469,41 @@ function initNavbar() {
 function initCountdown() {
   function update() {
     const now = new Date();
-    const target = new Date(CONFIG.valentineDate);
-
-    // If Valentine's has passed this year, it's the day or past
-    const diff = target - now;
+    const valentineDate = new Date('2026-02-14');
+    const valentineStart = new Date(valentineDate.getFullYear(), valentineDate.getMonth(), valentineDate.getDate(), 0, 0, 0);
+    const valentineEnd = new Date(valentineDate.getFullYear(), valentineDate.getMonth(), valentineDate.getDate(), 23, 59, 59);
 
     const msgEl = document.getElementById('countdown-message');
 
-    if (diff <= 0) {
-      // It's Valentine's Day or later!
+    // Check if it's Valentine's Day
+    if (now >= valentineStart && now <= valentineEnd) {
+      // It's Valentine's Day! Count down how much time is left in the day
+      const diff = valentineEnd - now;
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('cd-minutes').textContent = String(mins).padStart(2, '0');
+      document.getElementById('cd-seconds').textContent = String(secs).padStart(2, '0');
+      msgEl.textContent = '💖 Enjoy every moment of our special day! 💖';
+    } else if (now > valentineEnd) {
+      // Valentine's Day has ended
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-minutes').textContent = '00';
+      document.getElementById('cd-seconds').textContent = '00';
+      msgEl.textContent = '💕 Until next Valentine\'s Day, my love! 💕';
+    } else {
+      // Before Valentine's Day - shouldn't normally happen but just in case
       document.getElementById('cd-days').textContent = '00';
       document.getElementById('cd-hours').textContent = '00';
       document.getElementById('cd-minutes').textContent = '00';
       document.getElementById('cd-seconds').textContent = '00';
       msgEl.textContent = '💖 Happy Valentine\'s Day, My Love! 💖';
-      return;
     }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-    document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('cd-minutes').textContent = String(mins).padStart(2, '0');
-    document.getElementById('cd-seconds').textContent = String(secs).padStart(2, '0');
-    msgEl.textContent = days === 0 ? '💕 Almost here!' : '';
   }
 
   update();
@@ -944,230 +914,6 @@ function initSoundSystem() {
 }
 
 // ═══════════════════════════════════════
-// MEMORY GAME
-// ═══════════════════════════════════════
-function initMemoryGame() {
-  const grid = document.getElementById('memory-grid');
-  const movesEl = document.getElementById('game-moves');
-  const matchesEl = document.getElementById('game-matches');
-  const resetBtn = document.getElementById('game-reset');
-  const completeEl = document.getElementById('game-complete-message');
-  const completeTextEl = document.getElementById('complete-message-text');
-  const nextBtn = document.getElementById('game-next-surprise');
-
-  let cards = [];
-  let flippedCards = [];
-  let moves = 0;
-  let matches = 0;
-  let canFlip = true;
-
-  function createCards() {
-    const emojis = [...CONFIG.memoryEmojis, ...CONFIG.memoryEmojis];
-    emojis.sort(() => Math.random() - 0.5);
-
-    grid.innerHTML = '';
-    cards = [];
-    
-    emojis.forEach((emoji, index) => {
-      const card = document.createElement('div');
-      card.className = 'memory-card';
-      card.dataset.emoji = emoji;
-      card.dataset.index = index;
-      card.innerHTML = `
-        <div class="memory-card-face memory-card-front">❓</div>
-        <div class="memory-card-face memory-card-back">${emoji}</div>
-      `;
-      card.addEventListener('click', () => flipCard(card));
-      grid.appendChild(card);
-      cards.push(card);
-    });
-  }
-
-  function flipCard(card) {
-    if (!canFlip || card.classList.contains('flipped') || card.classList.contains('matched')) return;
-
-    card.classList.add('flipped');
-    flippedCards.push(card);
-    Sounds.play('pop');
-
-    if (flippedCards.length === 2) {
-      canFlip = false;
-      moves++;
-      movesEl.textContent = moves;
-      checkMatch();
-    }
-  }
-
-  function checkMatch() {
-    const [card1, card2] = flippedCards;
-    const match = card1.dataset.emoji === card2.dataset.emoji;
-
-    setTimeout(() => {
-      if (match) {
-        card1.classList.add('matched');
-        card2.classList.add('matched');
-        matches++;
-        matchesEl.textContent = `${matches}/${CONFIG.memoryEmojis.length}`;
-        Sounds.play('success');
-
-        if (matches === CONFIG.memoryEmojis.length) {
-          setTimeout(gameComplete, 500);
-        }
-      } else {
-        card1.classList.remove('flipped');
-        card2.classList.remove('flipped');
-      }
-      flippedCards = [];
-      canFlip = true;
-    }, 800);
-  }
-
-  function gameComplete() {
-    const messages = [
-      'Wow! You found all our memories! 🎉 Just like how you found your way into my heart — perfectly! 💕',
-      'You matched everything perfectly... just like we do! 💖 We\'re a perfect match in every way!',
-      'Amazing memory! Though I bet you can\'t remember the exact moment you made me fall in love... because it was EVERY moment! 😍'
-    ];
-    completeTextEl.textContent = messages[Math.floor(Math.random() * messages.length)];
-    completeEl.classList.remove('hidden');
-    Confetti.init();
-    Confetti.burst(60);
-    Sounds.play('success');
-  }
-
-  function reset() {
-    moves = 0;
-    matches = 0;
-    flippedCards = [];
-    canFlip = true;
-    movesEl.textContent = '0';
-    matchesEl.textContent = '0/8';
-    completeEl.classList.add('hidden');
-    createCards();
-    Sounds.play('whoosh');
-  }
-
-  resetBtn.addEventListener('click', reset);
-  nextBtn.addEventListener('click', () => {
-    document.getElementById('love-quiz').scrollIntoView({ behavior: 'smooth' });
-  });
-
-  createCards();
-}
-
-// ═══════════════════════════════════════
-// LOVE QUIZ
-// ═══════════════════════════════════════
-function initLoveQuiz() {
-  const container = document.getElementById('quiz-container');
-  const resultEl = document.getElementById('quiz-result');
-  const scoreEl = document.getElementById('quiz-score');
-  const resultTitleEl = document.getElementById('quiz-result-title');
-  const resultMessageEl = document.getElementById('quiz-result-message');
-  const retryBtn = document.getElementById('quiz-retry');
-
-  let currentQuestion = 0;
-  let score = 0;
-  let answered = [];
-
-  function showQuestion(index) {
-    const q = CONFIG.quizQuestions[index];
-    const questionDiv = document.createElement('div');
-    questionDiv.className = 'quiz-question';
-    questionDiv.innerHTML = `
-      <span class="quiz-question-number">${index + 1}</span>
-      <p class="quiz-question-text">${q.question}</p>
-      <div class="quiz-options">
-        ${q.options.map((opt, i) => `
-          <button class="quiz-option" data-index="${i}">
-            <span class="option-icon">💝</span>
-            <span>${opt}</span>
-          </button>
-        `).join('')}
-      </div>
-    `;
-    
-    container.innerHTML = '';
-    container.appendChild(questionDiv);
-
-    questionDiv.querySelectorAll('.quiz-option').forEach(btn => {
-      btn.addEventListener('click', () => answerQuestion(btn, index, parseInt(btn.dataset.index)));
-    });
-  }
-
-  function answerQuestion(btn, qIndex, optIndex) {
-    if (answered.includes(qIndex)) return;
-    answered.push(qIndex);
-
-    const q = CONFIG.quizQuestions[qIndex];
-    const correct = optIndex === q.correct;
-    const allOptions = btn.parentElement.querySelectorAll('.quiz-option');
-
-    if (correct) {
-      btn.classList.add('correct');
-      score++;
-      Sounds.play('success');
-    } else {
-      btn.classList.add('wrong');
-      allOptions[q.correct].classList.add('correct');
-      Sounds.play('pop');
-    }
-
-    allOptions.forEach(opt => opt.style.pointerEvents = 'none');
-
-    setTimeout(() => {
-      if (qIndex < CONFIG.quizQuestions.length - 1) {
-        showQuestion(qIndex + 1);
-      } else {
-        showResults();
-      }
-    }, 1500);
-  }
-
-  function showResults() {
-    container.style.display = 'none';
-    resultEl.classList.remove('hidden');
-    scoreEl.textContent = score;
-
-    const percentage = (score / CONFIG.quizQuestions.length) * 100;
-    let title, message;
-
-    if (percentage === 100) {
-      title = '💯 Perfect Score! 💯';
-      message = 'You know us SO well! It\'s like we\'re connected at the soul. Every answer was perfect... just like you! 💕';
-      Confetti.init();
-      Confetti.celebration();
-    } else if (percentage >= 80) {
-      title = '🌟 Amazing! 🌟';
-      message = 'Wow! You really pay attention! You know us better than I thought possible. You\'re incredible! 💖';
-    } else if (percentage >= 60) {
-      title = '💕 Great Job! 💕';
-      message = 'Pretty good! But let me tell you more about us... I want you to know EVERYTHING! ✨';
-    } else {
-      title = '💝 Keep Learning! 💝';
-      message = 'That\'s okay! We have a whole lifetime to learn everything about each other! Let\'s make more memories! 🥰';
-    }
-
-    resultTitleEl.textContent = title;
-    resultMessageEl.textContent = message;
-    Sounds.play('success');
-  }
-
-  function reset() {
-    currentQuestion = 0;
-    score = 0;
-    answered = [];
-    container.style.display = 'block';
-    resultEl.classList.add('hidden');
-    showQuestion(0);
-    Sounds.play('whoosh');
-  }
-
-  retryBtn.addEventListener('click', reset);
-  showQuestion(0);
-}
-
-// ═══════════════════════════════════════
 // SPIN THE WHEEL
 // ═══════════════════════════════════════
 function initSpinWheel() {
@@ -1407,66 +1153,4 @@ function initTreasureHunt() {
       Confetti.celebration();
     }
   });
-}
-
-// ═══════════════════════════════════════
-// KONAMI CODE EASTER EGG
-// ═══════════════════════════════════════
-function initKonamiCode() {
-  const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-  let konamiIndex = 0;
-
-  document.addEventListener('keydown', (e) => {
-    const key = e.key.toLowerCase() === 'b' || e.key.toLowerCase() === 'a' ? e.key.toLowerCase() : e.key;
-    
-    if (key === konamiCode[konamiIndex]) {
-      konamiIndex++;
-      if (konamiIndex === konamiCode.length) {
-        triggerKonamiEasterEgg();
-        konamiIndex = 0;
-      }
-    } else {
-      konamiIndex = 0;
-    }
-  });
-
-  function triggerKonamiEasterEgg() {
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 10003;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: fadeIn 0.3s ease;
-    `;
-    
-    overlay.innerHTML = `
-      <div class="konami-message">
-        <div class="konami-emoji">🎮</div>
-        <p class="konami-text">
-          YOU FOUND THE SECRET CODE! 🎉<br><br>
-          You're not just a player in this game called life...<br>
-          You're my Player 2, my teammate, my co-op partner in everything!<br><br>
-          Level Up: Our Love Meter is at MAX! 💯💕<br><br>
-          Achievement Unlocked: "You're Perfect" 🏆
-        </p>
-      </div>
-    `;
-
-    document.body.appendChild(overlay);
-    Sounds.play('success');
-    Confetti.init();
-    Confetti.celebration();
-
-    overlay.addEventListener('click', () => {
-      overlay.remove();
-    });
-
-    setTimeout(() => {
-      overlay.style.opacity = '1';
-    }, 10);
-  }
 }
